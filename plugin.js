@@ -19,7 +19,7 @@ $.fn.easyCart = function(options) {
         var temp = [];        
         $(this).find(".pd_qty").each(function(k,v){
             var item_data = {
-                pd_index : k,
+                pd_index : $(this).attr("data-index"),
                 pd_id : $(this).attr("data-id"),
                 pd_qty : $(this).val()
             };
@@ -63,6 +63,8 @@ $.fn.easyCart = function(options) {
             for(var i=0; i < data.length; i++){
                 var cartItem = $(settings.cart_template);
 
+                cartItem.addClass("cart-item-row");
+
                 if(typeof data[i].pd_id == "undefined"){
                     alert("product id is required");
                 }
@@ -88,7 +90,9 @@ $.fn.easyCart = function(options) {
                 
                 if(typeof data[i].pd_qty != "undefined"){                
                     if(cartItem.find(".pd_qty").prop("tagName").toLowerCase() == "input"){                        
-                        cartItem.find(".pd_qty").val(data[i].pd_qty).attr("data-id",data[i].pd_id);
+                        cartItem.find(".pd_qty").val(data[i].pd_qty)
+                                                .attr("data-id",data[i].pd_id)
+                                                .attr("data-index",i);
 
                         if(settings.customUpdate == false){                            
                             cartItem.find(".pd_qty").change(function(){ 
@@ -130,7 +134,6 @@ $.fn.easyCart = function(options) {
             }
 
             var totalString = "";
-            console.log(settings.cart_currency);
             for (var key in totalAmount) {
                 if (totalAmount.hasOwnProperty(key)) {
                     if(totalAmount[key] != 0){
@@ -143,7 +146,12 @@ $.fn.easyCart = function(options) {
             if(settings.cart_currency.length == 1){
                 $(".cart_discount").text(settings.discount);
                 $(".cart_net_total").text((totalAmount - Number(settings.discount)));
-            }            
+            }   
+
+            $(".pd_remove").click(function(){
+                $(this).parents(".cart-item-row").remove();
+                self.update();
+            })         
 
             if(settings.cart_after_render !== null && typeof settings.cart_after_render == "function"){
                 settings.cart_after_render({out_of_stock : out_of_stock,data : data});
