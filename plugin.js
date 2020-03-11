@@ -131,15 +131,18 @@ $.fn.easyCart = function(options) {
 
                 var currency_index = 0;
 
-                if(typeof data[i].pd_currency != "undefined" && typeof settings.cart_currency[data[i].pd_currency] == "undefined")
-                    currency_index = settings.cart_currency[data[i].pd_currency];
-
+                if(typeof data[i].pd_currency != "undefined")
+                {
+                    currency_index = data[i].pd_currency;
+                }  
+                
                 totalAmount[settings.cart_currency[currency_index]] += data[i].sub_total_amount;
                 cartItem.find(".pd_subtotal").text(data[i].sub_total_amount+self.currency(data[i].pd_currency));
                 this.append(cartItem);
             }
 
             var totalString = "";
+            console.log(totalAmount);
             for (var key in totalAmount) {
                 if (totalAmount.hasOwnProperty(key)) {
                     if(totalAmount[key] != 0){
