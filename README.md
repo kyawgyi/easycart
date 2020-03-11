@@ -10,9 +10,13 @@ We have two part for this plugin
 If you need extra information for Product. This element will accept html content.
 .pd_meta1 , .pd_meta2,  .pd_meta3
 .pd_price = Product Price
+.pd_old_price = Product Old Price if product have discount price
 .pd_qty = Product Quantity
 .pd_subtotal = Product Subtotal display ( plugin will calculate subtotal base on price and qty)
 .pd_remove = Product Remove Button
+.cart_total  = total amount in cart
+.cart_discount = discount over total amount
+.cart_net_total = total after discount.
 
 Cart Data should be in this format
 ```
@@ -40,12 +44,12 @@ Cart Data should be in this format
 ]
 ```
 
-Cart Currency
+**Cart Currency**
 if we do not defined currency, default will be US$.
 ```
 cart_currency : ['US$','MMK']
 ```
-Cart Item template
+**Cart Item template**
 Plugin need cart items row template to render with cart json object data.
 ```
 cart_template : $(".cart_template").html(),
@@ -56,3 +60,12 @@ cart_after_render : function(){
 	//your custom code here
 }
 ```
+**Ajax Request**
+When you change product quantity or remove the product from Cart, It will make a ajax call by plugin. This request will include updated cart data and you can update to your session data.
+If you found out of stock for new quantity changes, can response with "out_of_stock":true
+for the product.
+
+**Multi currency**
+When we are using multi currency, plugin will not do changing currency using exchange rate.
+It will sum same currency unit amount and display separately ( 122US$  250000MMK )
+When using multi currency, **discount** is not supported.

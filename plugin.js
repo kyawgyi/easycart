@@ -87,6 +87,10 @@ $.fn.easyCart = function(options) {
                 if(typeof data[i].pd_price != "undefined"){
                     cartItem.find(".pd_price").text(data[i].pd_price+self.currency(data[i].pd_currency));
                 }
+
+                if(typeof data[i].pd_old_price != "undefined"){
+                    cartItem.find(".pd_old_price").text(data[i].pd_old_price+self.currency(data[i].pd_currency));
+                }
                 
                 if(typeof data[i].pd_qty != "undefined"){                
                     if(cartItem.find(".pd_qty").prop("tagName").toLowerCase() == "input"){                        
