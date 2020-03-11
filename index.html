@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		table td,table th{
+			border:1px solid #ddd
+		}
+		table{
+		  border-collapse: collapse;
+		}
+	</style>
+</head>
+<body>
+	<!-- This is cart table row template -->
+	<table  style="display:none">
+		<tbody class="cart_template">
+			<tr>
+				<td>
+					<img src="" alt="product Image" class="pd_image"/>
+					<h5 class="pd_name"></h5>
+					<span class="pd_out_of_stock">Quanity is not enough</span>
+				</td>
+				<td>
+					<p class="pd_meta1"></p>
+				</td>
+				<td>
+					<p class="pd_meta2"></p>
+				</td>
+				<td>
+					<p class="pd_meta3"></p>
+				</td>
+				<td>
+					<span class="pd_price"></span>
+				</td>
+				<td>
+					<input type="number" class="pd_qty" />
+				</td>
+				<td>
+					<span class="pd_subtotal"></span>
+				</td>
+				<td>
+					<button class="pd_remove">remove</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- This is cart table row template end -->
+
+	<table class="cart" style="">
+		<thead>
+			<tr>
+				<th>Product</th>
+				<th>Options</th>
+				<th>Options2</th>
+				<th>Options3</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Subtotal</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody class="cart-item-container">
+			
+		</tbody>
+		
+	</table>
+	<div>
+		<label>Total</label>:<span class="cart_total"></span><br/>
+		<!-- <label>Discount</label>:<span class="cart_discount"></span><br/>
+		<label>Net Total</label>:<span class="cart_net_total"></span><br/> -->
+	</div>
+	<button class="checkout">Checkout</button>
+	<script
+	  src="https://code.jquery.com/jquery-3.4.1.min.js"
+	  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	  crossorigin="anonymous"></script>
+	<script type="text/javascript" src="plugin.js"></script>
+	<script type="text/javascript">
+		$(".cart-item-container").easyCart({
+			cart_currency : ['US$','MMK'],
+			cart_data : [
+							{
+								pd_id : 22,
+								pd_name : "product Name 1",
+								pd_image : "http://via.placeholder.com/100x90.png?text=sample_image",
+								pd_meta1 : "weight:1122<br/>color:white",
+								pd_meta2 : "product Option data2",
+								pd_meta3 : "product Option data3",
+								pd_price : 120,
+								pd_currency : 0,
+								pd_qty   : 2,
+							},
+							{
+								pd_id : 23,
+								pd_name : "product Name 2",
+								pd_image : "http://via.placeholder.com/100x90.png?text=sample_image",
+								pd_meta1 : "product Option data",
+								pd_price : 150,
+								pd_currency : 0,
+								pd_qty   : 3,
+							},
+							{
+								pd_id : 23,
+								pd_name : "product Name 3",
+								pd_image : "http://via.placeholder.com/100x90.png?text=sample_image",
+								pd_meta1 : "product Option data",
+								pd_price : 150,
+								pd_currency : 1,
+								pd_qty   : 3,
+							}
+						],
+			cart_update_ajax_url : "cart_ajax.html",
+			cart_template : $(".cart_template").html(),
+			cart_after_render : function(status){
+				if(status.out_of_stock == true){
+					$(".checkout").attr("disabled",true);
+				}else{
+					$(".checkout").attr("disabled",false);
+				}
+			}
+		});
+	</script>
+</body>
+</html>
