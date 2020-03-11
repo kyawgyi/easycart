@@ -33,8 +33,10 @@ $.fn.easyCart = function(options) {
             success: function(result){ 
                 settings.cart_data = result;
                 self.rebuild();
-            }
-        });
+            }            
+        }).fail(function() {
+                alert( "EasyCart:Ajax Request fail" );
+              });
     }
 
     this.currency = function(currency_index){

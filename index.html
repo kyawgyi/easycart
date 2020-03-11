@@ -47,31 +47,37 @@
 		</tbody>
 	</table>
 	<!-- This is cart table row template end -->
-
-	<table class="cart" style="">
-		<thead>
-			<tr>
-				<th>Product</th>
-				<th>Options</th>
-				<th>Options2</th>
-				<th>Options3</th>
-				<th>Price</th>
-				<th>Quantity</th>
-				<th>Subtotal</th>
-				<th>Action</th>
-			</tr>
-		</thead>
-		<tbody class="cart-item-container">
+	<div class="cart-table-wrapper">
+		<table class="cart-table" style="">
+			<thead>
+				<tr>
+					<th>Product</th>
+					<th>Options</th>
+					<th>Options2</th>
+					<th>Options3</th>
+					<th>Price</th>
+					<th>Quantity</th>
+					<th>Subtotal</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody class="cart-item-container">
+				
+			</tbody>
 			
-		</tbody>
-		
-	</table>
-	<div>
-		<label>Total</label>:<span class="cart_total"></span><br/>
-		<!-- <label>Discount</label>:<span class="cart_discount"></span><br/>
-		<label>Net Total</label>:<span class="cart_net_total"></span><br/> -->
+		</table>
+		<div>
+			<label>Total</label>:<span class="cart_total"></span><br/>
+			<!-- <label>Discount</label>:<span class="cart_discount"></span><br/>
+			<label>Net Total</label>:<span class="cart_net_total"></span><br/> -->
+		</div>
+		<button class="checkout">Checkout</button>
 	</div>
-	<button class="checkout">Checkout</button>
+	<div class="cart-empty">
+		<h1>Your Cart is Empty</h1>
+	</div>
+	
+	
 	<script
 	  src="https://code.jquery.com/jquery-3.4.1.min.js"
 	  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -119,6 +125,14 @@
 					$(".checkout").attr("disabled",true);
 				}else{
 					$(".checkout").attr("disabled",false);
+				}
+				console.log(status.data.length);
+				if(status.data.length == 0){
+					$(".cart-table-wrapper").hide();
+					$(".cart-empty").show();
+				}else{
+					$(".cart-table-wrapper").show();
+					$(".cart-empty").hide();
 				}
 			}
 		});

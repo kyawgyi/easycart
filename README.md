@@ -69,3 +69,7 @@ for the product.
 When we are using multi currency, plugin will not do changing currency using exchange rate.
 It will sum same currency unit amount and display separately ( 122US$  250000MMK )
 When using multi currency, **discount** is not supported.
+
+**Remark**
+If there is not product in your cart, Do not you return empty response.
+It should be empty array [ ];
