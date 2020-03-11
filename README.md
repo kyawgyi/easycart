@@ -4,6 +4,7 @@ We have two part for this plugin
 2) Cart total and discount
 
 **This plugin working with class names.**
+```
 .pd_image = Product Image
 .pd_name = Product Name
 .pd_out_of_stock = Product out of stock message ( plugin will do show/hide this element )
@@ -17,6 +18,7 @@ If you need extra information for Product. This element will accept html content
 .cart_total  = total amount in cart
 .cart_discount = discount over total amount
 .cart_net_total = total after discount.
+```
 
 Cart Data should be in this format
 ```
