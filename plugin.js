@@ -116,7 +116,19 @@ $.fn.easyCart = function(options) {
                                         }
                                     }
                                 },1000);
+                            }).change(function(){
+                                var qty = $(this);
+                                if(qty.val() !== ""){
+
+                                    if(Number(qty.val()) == 0)
+                                    {
+                                        qty.val(qty.attr("data-cache"));
+                                    }else{
+                                        self.update();
+                                    }
+                                }
                             });
+
                         }
                     }
                     else
