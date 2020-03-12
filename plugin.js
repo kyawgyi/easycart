@@ -90,7 +90,7 @@ $.fn.easyCart = function(options) {
                     cartItem.find(".pd_price").text(data[i].pd_price+self.currency(data[i].pd_currency));
                 }
 
-                if(typeof data[i].pd_old_price != "undefined"){
+                if(typeof data[i].pd_old_price != "undefined" && data[i].pd_old_price != 0){
                     cartItem.find(".pd_old_price").text(data[i].pd_old_price+self.currency(data[i].pd_currency));
                 }
                 

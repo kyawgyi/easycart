@@ -95,7 +95,7 @@
 								pd_meta2 : "product Option data2",
 								pd_meta3 : "product Option data3",
 								pd_price : 120,
-								pd_old_price : 150,
+								pd_old_price : 0,
 								pd_currency : 0,
 								pd_qty   : 2,
 							},
@@ -105,6 +105,7 @@
 								pd_image : "http://via.placeholder.com/100x90.png?text=sample_image",
 								pd_meta1 : "product Option data",
 								pd_price : 150,
+								pd_old_price : 160,
 								pd_currency : 0,
 								pd_qty   : 3,
 							},
@@ -126,7 +127,7 @@
 				}else{
 					$(".checkout").attr("disabled",false);
 				}
-				console.log(status.data.length);
+				
 				if(status.data.length == 0){
 					$(".cart-table-wrapper").hide();
 					$(".cart-empty").show();
