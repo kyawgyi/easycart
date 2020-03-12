@@ -98,11 +98,24 @@ $.fn.easyCart = function(options) {
                     if(cartItem.find(".pd_qty").prop("tagName").toLowerCase() == "input"){                        
                         cartItem.find(".pd_qty").val(data[i].pd_qty)
                                                 .attr("data-id",data[i].pd_id)
-                                                .attr("data-index",i);
+                                                .attr("data-index",i)
+                                                .attr("data-cache",data[i].pd_qty);
 
                         if(settings.customUpdate == false){                            
-                            cartItem.find(".pd_qty").change(function(){ 
-                                self.update();
+                            cartItem.find(".pd_qty").keyup(function(){ 
+                                var qty = $(this);
+                                setTimeout(function(){
+
+                                    if(qty.val() !== ""){
+
+                                        if(Number(qty.val()) == 0)
+                                        {
+                                            qty.val(qty.attr("data-cache"));
+                                        }else{
+                                            self.update();
+                                        }
+                                    }
+                                },1000);
                             });
                         }
                     }
