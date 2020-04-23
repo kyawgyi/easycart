@@ -10,7 +10,8 @@ $.fn.easyCart = function(options) {
         customUpdate :false,
         cart_update_ajax_url : null,
         discount : 0,
-        cart_currency : ['$']
+        cart_currency : ['$'],
+        no_decimal_place : null,
     }, options );
 
     var self = this;
@@ -166,16 +167,41 @@ $.fn.easyCart = function(options) {
                 this.append(cartItem);
             }
 
-            var totalString = "";
-            console.log(totalAmount);
+            var sub_totalString = "";
             for (var key in totalAmount) {
                 if (totalAmount.hasOwnProperty(key)) {
                     if(totalAmount[key] != 0){
-                        totalString+= totalAmount[key]+key+" &nbsp;";
+                        sub_totalString+= totalAmount[key]+key+" &nbsp;";
                     }
                 }
             }
 
+            commercial_tax = [];
+            commercial_tax_string = "";
+            for (var key in totalAmount) {
+                if (totalAmount.hasOwnProperty(key)) {
+                    commercial_tax[key] = totalAmount[key] * 5 / 100;                    
+
+                    if(settings.no_decimal_place != key)
+                    commercial_tax[key] = Number(commercial_tax[key].toFixed(2));
+                    else
+                    commercial_tax[key] = Number(commercial_tax[key].toFixed(0));
+
+                    commercial_tax_string+= commercial_tax[key]+key+" &nbsp;";
+                }
+            }
+
+            var totalString = "";
+            for (var key in totalAmount) {
+                if (totalAmount.hasOwnProperty(key)) {
+                    if(totalAmount[key] != 0){
+                        totalString+= (totalAmount[key]+commercial_tax[key])+key+" &nbsp;";
+                    }
+                }
+            }
+
+            $(".cart_sub_total").html(sub_totalString);
+            $(".cart_tax").html(commercial_tax_string);
             $(".cart_total").html(totalString);
             if(settings.cart_currency.length == 1){
                 $(".cart_discount").text(settings.discount);

@@ -67,9 +67,9 @@
 			
 		</table>
 		<div>
+			<label>Sub Total</label>:<span class="cart_sub_total"></span><br/>
+			<label>Commercial Tax(5%)</label>:<span class="cart_tax"></span><br/>
 			<label>Total</label>:<span class="cart_total"></span><br/>
-			<!-- <label>Discount</label>:<span class="cart_discount"></span><br/>
-			<label>Net Total</label>:<span class="cart_net_total"></span><br/> -->
 		</div>
 		<button class="checkout">Checkout</button>
 	</div>
@@ -86,6 +86,7 @@
 	<script type="text/javascript">
 		$(".cart-item-container").easyCart({
 			cart_currency : ['US$','MMK'],
+			no_decimal_place : "MMK",
 			cart_data : [
 							{
 								pd_id : 22,
